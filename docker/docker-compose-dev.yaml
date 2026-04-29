@@ -24,7 +24,7 @@ services:
   #     args:
   #       APT_MIRROR: ${APT_MIRROR:-}
   #   container_name: deer-flow-provisioner
-  #   
+  #   volumes:
   #     - ~/.kube/config:/root/.kube/config:ro
   #   environment:
   #     - K8S_NAMESPACE=deer-flow
@@ -235,8 +235,6 @@ volumes:
   # image build are not shadowed by the host backend/ directory mount.
   gateway-venv:
   gateway-uv-cache:
-  langgraph-venv:
-  langgraph-uv-cache:
 
 networks:
   deer-flow-dev:
