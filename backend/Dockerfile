@@ -50,12 +50,6 @@ COPY backend ./backend
 RUN --mount=type=cache,target=/root/.cache/uv \
     sh -c "cd backend && UV_INDEX_URL=${UV_INDEX_URL:-https://pypi.org/simple} uv sync ${UV_EXTRAS:+--extra $UV_EXTRAS}"
 
-# Install Playwright Chromium browser into a fixed path so it can be COPY'd
-# into the runtime stage without re-downloading.
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-RUN cd backend && uv run --no-sync playwright install chromium --with-deps \
-    && rm -rf /var/lib/apt/lists/*
-
 # ── Stage 2: Dev ──────────────────────────────────────────────────────────────
 # Retains compiler toolchain from builder so startup-time `uv sync` can build
 # source distributions in development containers.
